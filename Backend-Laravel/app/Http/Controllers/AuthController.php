@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Rules\ValidarRut;
 
 class AuthController extends Controller
 {
@@ -18,7 +19,7 @@ class AuthController extends Controller
             'second_name' => 'required|string|max:100',
             'first_last_name' => 'required|string|max:100',
             'second_last_name' => 'required|string|max:100',
-            'identificador' => 'required|string|max:100|unique:users',
+            'identificador' => ['required','unique:users,identificador',new ValidarRut()],
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|min:8'
         ];
