@@ -21,7 +21,8 @@ class AuthController extends Controller
             'second_last_name' => 'required|string|max:100',
             'identificador' => ['required','unique:users,identificador',new ValidarRut()],
             'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:8',
+            'rol' => 'required|string|max:100',
         ];
 
         $validator = Validator::make($request->input(), $rules);
@@ -39,6 +40,7 @@ class AuthController extends Controller
             'identificador' => $request->identificador,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'rol' => $request->rol,
         ]);
         return response()->json([
             'status' => true,
