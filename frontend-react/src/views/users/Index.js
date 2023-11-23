@@ -3,7 +3,6 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import UserDelete from './UserDelete';
 import UserEdit from './UserEdit';
-import Register from '../Register';
 import { Button } from 'react-bootstrap';
 
 const Index = () => {
@@ -40,11 +39,13 @@ const Index = () => {
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
-            <th>#</th>
             <th>Nombre</th>
+            <th>Segundo nombre</th>
             <th>Apellido</th>
+            <th>Segundo apellido</th>
             <th>Email</th>
             <th>Identificador</th>
+            <th>Puntaje</th>
             <th>Editar</th>
             <th>Eliminar</th>
           </tr>
@@ -52,11 +53,13 @@ const Index = () => {
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <td>{user.id}</td>
               <td>{user.first_name}</td>
+              <td>{user.second_name}</td>
               <td>{user.first_last_name}</td>
+              <td>{user.second_last_name}</td>
               <td>{user.email}</td>
               <td>{user.identificador}</td>
+              <td>{user.score}</td>
               <td><UserEdit userId={user.id} /></td>
               <td><UserDelete userId={user.id} /></td>
             </tr>

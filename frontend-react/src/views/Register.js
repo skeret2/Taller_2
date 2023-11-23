@@ -14,6 +14,7 @@ const Register = () => {
         email: '',
         password: '',
         rol: 'usuario',
+        score: 0,
     });
 
     const handleChange = (e) => {
@@ -95,6 +96,11 @@ const Register = () => {
                         <label>
                             Contraseña:
                             <input type="password" name="password" value={formData.password} onChange={handleChange} />
+                        </label>
+
+                        <label>
+                            Puntaje:
+                            <input type="number" name="score" value={formData.score} onChange={handleChange} />
                         </label>
                     </div>
 

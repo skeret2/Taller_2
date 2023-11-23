@@ -12,6 +12,7 @@ const UserEdit = ({userId, onUserEdited}) => {
         email: '',
         password: '',
         rol: 'usuario',
+        score: 0,
     });
 
     const [showModal, setShowModal] = useState(false);
@@ -103,6 +104,11 @@ const UserEdit = ({userId, onUserEdited}) => {
                                 <label>
                                     Contraseña:
                                     <input type="password" name="password" value={formData.password} onChange={handleChange} />
+                                </label>
+
+                                <label>
+                                    Puntaje:
+                                    <input type="number" name="score" value={formData.score} onChange={handleChange} />
                                 </label>
                             </div>
                         </Form>

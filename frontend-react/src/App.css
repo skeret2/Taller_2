@@ -168,7 +168,7 @@ div.contraseña {
     display: flex;
 }
 div.contraseña input {
-    width: 250px;
+    width: 200px;
     height: 35px;
     border: 1px solid #009929;
     border-radius: 5px;
