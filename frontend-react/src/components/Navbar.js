@@ -20,9 +20,8 @@ const Navegacion = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-                <Link className='nav-link' to='/Home' >Home</Link>
+                <Link className='nav-link' to='/' >Home</Link>
                 {authUser ? null : <Link className='nav-link' to='/Login'>Login</Link>}
-                {authUser ? null : <Link className='nav-link' to='/Register'>Register</Link>}
                 {authUser ? <Link className='nav-link' to='/users/Index'>Gestión de usuarios</Link> : null}
 
                 <NavDropdown title="Más opciones" id="basic-nav-dropdown">

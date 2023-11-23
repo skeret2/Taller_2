@@ -8,6 +8,7 @@ const Logout = () => {
     const handleLogout = () => {
         removeToken();
         navigate('/Login');
+        window.location.reload();
     };
 
     return (

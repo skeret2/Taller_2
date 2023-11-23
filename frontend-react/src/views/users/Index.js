@@ -2,7 +2,10 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
-
+import UserDelete from './UserDelete';
+import UserEdit from './UserEdit';
+import Register from '../Register';
+import { Button } from 'react-bootstrap';
 const Index = () => {
   const [users, setUsers] = useState([]);
 
@@ -19,9 +22,12 @@ const Index = () => {
     fetchUsers();
   }, []);
 
+
   return (
     <div>
       <h2>Lista de Usuarios</h2>
+      <Button variant="primary" href='/Register'>Crear usuario</Button>
+      
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -29,6 +35,9 @@ const Index = () => {
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Email</th>
+            <th>Identificador</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +47,9 @@ const Index = () => {
             <td>{user.first_name}</td>
             <td>{user.first_last_name}</td>
             <td>{user.email}</td>
+            <td>{user.identificador}</td>
+            <td><UserEdit userId={user.id}/></td>
+            <td><UserDelete userId={user.id} /></td>
           </tr>
         ))}
         </tbody>
