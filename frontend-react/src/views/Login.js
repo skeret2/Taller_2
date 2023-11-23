@@ -26,11 +26,12 @@ const Login = () => {
         e.preventDefault();
 
         try {
-        const response = await axios.post('http://127.0.0.1:8000/api/auth/login', formData);
-        console.log(response.data.token)
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/login', formData);
+            //console.log(response.data.data.token)
+            
         // Verificar si la respuesta contiene un token
-        if (response.data.token) {
-            handleLoginSuccess(response.data.token);
+        if (response.data.data.token) {
+            handleLoginSuccess(response.data.data.token);
         } else {
             console.error('Token no encontrado en la respuesta del servidor');
         }

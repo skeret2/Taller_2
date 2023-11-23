@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\ValidarRut;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -20,7 +22,7 @@ class AuthController extends Controller
             'first_last_name' => 'required|string|max:100',
             'second_last_name' => 'required|string|max:100',
             'identificador' => ['required','unique:users,identificador',new ValidarRut()],
-            'email' => 'required|string|email|max:100|unique:users',
+            'email' => 'required|string|email|max:100|unique:users,email',
             'password' => 'required|string|min:8',
             'rol' => 'required|string|max:100',
         ];
@@ -42,11 +44,14 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'rol' => $request->rol,
         ]);
+
+        $token = JWTAuth::fromUser($user);
+
         return response()->json([
             'status' => true,
+            'token' => $token,
             'message' => 'User created successfully',
-            'token' => $user->createToken('API TOKEN')->plainTextToken
-        ], 200);
+        ], 201);
     }
 
     public function login(Request $request)
@@ -55,42 +60,28 @@ class AuthController extends Controller
             'email' => 'string|email|max:100',
             'password' => 'required|string'
         ];
-        $validator = Validator::make($request->input(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'errors' => $validator->errors()->all()
-            ], 400);
+
+        $credentials = $request->only('email', 'password');
+
+        if(Auth::guard('api')->attempt($credentials)){
+            $user = Auth::guard('api')->user();
+            $token = JWTAuth::fromUser($user);
+            $success = true;
+            $data = compact('user', 'token');
+            return compact('success', 'data');
         }
-        if (
-            !Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])
-        ) {
-            return response()->json([
-                'status' => false,
-                'errors' => ['Unauthorized']
-            ], 401);
+        else{
+            $success = false;
+            $data = 'Unauthorized';
+            return compact('success', 'data');
         }
-
-        $user = User::where('email', $request->email)
-        ->first();
-
-
-        return response()->json([
-            'status' => true,
-            'message' => 'User logged in successfully',
-            'data' => $user,
-            'token' => $user->createToken('API TOKEN')->plainTextToken
-        ], 200);
     }
     public function logout(Request $request)
     {
         // Revocar el token actual del usuario autenticado
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'status' => true,
-            'message' => 'User logged out successfully'
-        ], 200);
+        Auth::guard('api')->logout();
+        $success = true;
+        return compact('success');
     }
 
 
@@ -101,7 +92,7 @@ class AuthController extends Controller
             'second_name' => 'required|string|max:100',
             'first_last_name' => 'required|string|max:100',
             'second_last_name' => 'required|string|max:100',
-            'email' => 'required|string|email|max:100|unique:users',
+            'email' => 'required|string|email|max:100|unique:users,email,' . $user->id,
             'password' => 'required|string|min:8'
         ];
 
@@ -112,12 +103,14 @@ class AuthController extends Controller
                 'errors' => $validator->errors()->all()
             ], 400);
         }
+
         $user->update($request->input());
         return response()->json([
             'status' => true,
             'message' => 'User updated successfully',
         ], 200);
     }
+
 
     public function index()
     {

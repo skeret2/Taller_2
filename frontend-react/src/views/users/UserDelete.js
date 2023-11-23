@@ -12,12 +12,20 @@ const UserDelete = ({ userId, onUserDeleted }) => {
 
     const handleConfirmDelete = async () => {
         try {
-        const response = await axios.delete(`http://127.0.0.1:8000/api/auth/delete/${userId}`);
-        //actualizar la lista de usuarios después de la eliminación.
-        window.location.reload();
-        if (onUserDeleted) {
-            onUserDeleted(userId);
-        }
+            // Se obtiene el token almacenado
+            const token = localStorage.getItem('token');
+
+            // Configura el encabezado de la solicitud con el token
+            const headers = {
+            Authorization: `Bearer ${token}`,
+            };
+
+            const response = await axios.delete(`http://127.0.0.1:8000/api/auth/delete/${userId}`,{ headers });
+            //actualizar la lista de usuarios después de la eliminación.
+            window.location.reload();
+            if (onUserDeleted) {
+                onUserDeleted(userId);
+            }
         } catch (error) {
         console.error('Error al eliminar usuario:', error.response.data);
         } finally {

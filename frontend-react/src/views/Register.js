@@ -24,8 +24,17 @@ const Register = () => {
         e.preventDefault();
 
         try {
+
+            // Se obtiene el token almacenado
+            const token = localStorage.getItem('token');
+
+            // Configura el encabezado de la solicitud con el token
+            const headers = {
+            Authorization: `Bearer ${token}`,
+            };
+
             // Realizar la solicitud POST al backend de Laravel
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/register', formData);
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/register', formData, { headers });
             console.log('Respuesta del servidor:', response.data);
             alert('Usuario registrado exitosamente');
             window.location.href = '/users/Index';

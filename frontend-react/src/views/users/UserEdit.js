@@ -33,7 +33,15 @@ const UserEdit = ({userId, onUserEdited}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.put(`http://127.0.0.1:8000/api/auth/update/users/${userId}`, formData);
+            // Se obtiene el token almacenado
+            const token = localStorage.getItem('token');
+
+            // Configura el encabezado de la solicitud con el token
+            const headers = {
+            Authorization: `Bearer ${token}`,
+            };
+
+            const response = await axios.put(`http://127.0.0.1:8000/api/auth/update/users/${userId}`, formData,{ headers });
             //actualizar la lista de usuarios después de la edicion.
             window.location.reload();
             if (onUserEdited) {
