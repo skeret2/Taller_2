@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Rules\ValidarRut;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -25,6 +24,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:100|unique:users,email',
             'password' => 'required|string|min:8',
             'rol' => 'required|string|max:100',
+            'score' => 'required|integer| min:0',
         ];
 
         $validator = Validator::make($request->input(), $rules);
@@ -43,6 +43,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'rol' => $request->rol,
+            'score' => $request->score,
         ]);
 
         $token = JWTAuth::fromUser($user);
@@ -93,7 +94,8 @@ class AuthController extends Controller
             'first_last_name' => 'required|string|max:100',
             'second_last_name' => 'required|string|max:100',
             'email' => 'required|string|email|max:100|unique:users,email,' . $user->id,
-            'password' => 'required|string|min:8'
+            'password' => 'required|string|min:8',
+            'score' => 'required|integer| min:0',
         ];
 
         $validator = Validator::make($request->input(), $rules);
