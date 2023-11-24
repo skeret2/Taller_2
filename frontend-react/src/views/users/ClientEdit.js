@@ -63,59 +63,84 @@ const ClientEdit = ({clientId, onUserEdited}) => {
 
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
-                <Modal.Title>Editar usuario</Modal.Title>
+                    <div className='model-header'>
+                        <Modal.Title>Editar usuario</Modal.Title>
+                    </div>
+
                 </Modal.Header>
 
                 <Modal.Body>
                     <div className='contenedor-edit'>
                         <Form onSubmit={handleSubmit}>
                             <div className=''>
-                                <label>
-                                    Primer nombre:
-                                    <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} />
-                                </label>
+                                <Form.Group>
+                                    <Form.Label>Primer nombre:</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text" name="first_name" value={formData.first_name} onChange={handleChange}>
+                                    </Form.Control>
+                                </Form.Group>
+                                
+                                <Form.Group>
+                                    <Form.Label>Segundo nombre:</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text" name="second_name" value={formData.second_name} onChange={handleChange}>
+                                    </Form.Control>
+                                </Form.Group>
 
-                                <label>
-                                    Segundo nombre:
-                                    <input type="text" name="second_name" value={formData.second_name} onChange={handleChange} />
-                                </label>
                             </div>
                             
                             <div className=''>
-                                <label>
-                                    Primer apellido:
-                                    <input type="text" name="first_last_name" value={formData.first_last_name} onChange={handleChange} />
-                                </label>
 
-                                <label>
-                                    Segundo apellido:
-                                    <input type="text" name="second_last_name" value={formData.second_last_name} onChange={handleChange} />
-                                </label>
+                                <Form.Group>
+                                    <Form.Label>Primer apellido:</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text" name="first_last_name" value={formData.first_last_name} onChange={handleChange}>
+                                    </Form.Control>
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label>Segundo apellido:</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="text" name="second_last_name" value={formData.second_last_name} onChange={handleChange}>
+                                    </Form.Control>
+                                </Form.Group>
                             </div>
 
                             <div className=''>
-                                <label>
-                                    Correo electrónico:
-                                    <input type="email" name="email" value={formData.email} onChange={handleChange} />
-                                </label>
 
+                                <Form.Group>
+                                    <Form.Label>Correo electrónico:</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="email" name="email" placeholder='example@gmail.com' value={formData.email} onChange={handleChange}>
+                                    </Form.Control>
+                                </Form.Group>
 
-                                <label>
-                                    Puntaje:
-                                    <input type="number" name="score" value={formData.score} onChange={handleChange} />
-                                </label>
+                                <Form.Group>
+                                    <Form.Label>Puntaje:</Form.Label>
+                                    <Form.Control
+                                        required
+                                        type="number" name="score" value={formData.password} onChange={handleChange}>
+                                    </Form.Control>
+                                </Form.Group>
                             </div>
                         </Form>
                     </div>
                 </Modal.Body>
 
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseModal}>
-                    No
-                </Button>
-                <Button variant="primary" onClick={handleSubmit}>
-                    Guadar cambios
-                </Button>
+                    <Button variant="secondary" onClick={handleCloseModal}>
+                        No
+                    </Button>
+                    <div className='btn-edit'>
+                        <Button variant="primary" onClick={handleSubmit}>
+                            Guadar cambios
+                        </Button>
+                    </div>
                 </Modal.Footer>
             </Modal>
         </div>

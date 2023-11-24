@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 
-
-
 const Register = () => {
     const [formData, setFormData] = useState({
         first_name: '',
@@ -18,10 +16,11 @@ const Register = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-
+    
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
 
             // Se obtiene el token almacenado
@@ -49,43 +48,62 @@ const Register = () => {
                 <Form onSubmit={handleSubmit}>
                     <div className='nombres'>
 
-                        <label>
-                            Primer nombre:
-                            <input type="text" name="first_name" value={formData.first_name} onChange={handleChange} />
-                        </label>
+                        <Form.Group>
+                            <Form.Label>Primer nombre:</Form.Label>
+                            <Form.Control
+                            required
+                            type="text" name="first_name" value={formData.first_name} onChange={handleChange} >
+                            </Form.Control>
 
-                        <label>
-                            Segundo nombre:
-                            <input type="text" name="second_name" value={formData.second_name} onChange={handleChange} />
-                        </label>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Segundo nombre:</Form.Label>
+                            <Form.Control
+                            required
+                            type="text" name="second_name" value={formData.second_name} onChange={handleChange} >
+                            </Form.Control>
+                        </Form.Group>
 
                     </div>
                     
                     <div className='apellidos'>
 
-                        <label>
-                            Primer apellido:
-                            <input type="text" name="first_last_name" value={formData.first_last_name} onChange={handleChange} />
-                        </label>
+                        <Form.Group>
+                            <Form.Label>Primer apellido:</Form.Label>
+                            <Form.Control
+                            required
+                            type="stext" name="first_last_name" value={formData.first_last_name} onChange={handleChange} >
+                            </Form.Control>
+                        </Form.Group>
 
-                        <label>
-                            Segundo apellido:
-                            <input type="text" name="second_last_name" value={formData.second_last_name} onChange={handleChange} />
-                        </label>
+                        <Form.Group>
+                            <Form.Label>Segundo apellido:</Form.Label>
+                            <Form.Control
+                            required
+                            type="text" name="second_last_name" value={formData.second_last_name} onChange={handleChange} >
+                            </Form.Control>
+                        </Form.Group>
 
                     </div>
 
                     <div className='datos'>
 
-                        <label>
-                            Identificador:
-                            <input type="text" name="identificador" value={formData.identificador} onChange={handleChange} />
-                        </label>
+                        <Form.Group>
+                            <Form.Label>Identificador (Rut o DNI):</Form.Label>
+                            <Form.Control
+                            required
+                            type="text" name="identificador" placeholder='example:11222333k' value={formData.identificador} onChange={handleChange} >
+                            </Form.Control>
+                        </Form.Group>
 
-                        <label>
-                            Correo electrónico:
-                            <input type="email" name="email" value={formData.email} onChange={handleChange} />
-                        </label>
+                        <Form.Group>
+                            <Form.Label>Correo electrónico:</Form.Label>
+                            <Form.Control
+                            required
+                            type="email" name="email" placeholder='example@gmail.com' value={formData.email} onChange={handleChange} >
+                            </Form.Control>
+                        </Form.Group>
 
                     </div>
                     

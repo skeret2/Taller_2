@@ -1,6 +1,8 @@
 .navbar {
-    background-color: #009929;
+    background-color: #5ccb5f;
 }
+
+/*Diseño para el home*/
 div.home{
     display: flex;
     flex-direction: column;
@@ -13,60 +15,110 @@ div.home img{
     height: 100%;
     object-fit: cover;
 }
-
-
-div.contenedor-login{
+/*Diseño para el index*/
+div.register-index{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    padding: 2rem;
     
 }
+div.register-index h2{
+    color: #fff;
+    font-size: 2rem;
+    margin: 0;
+    background-color: #009929;
+    border-radius: 15px;
+    padding: 5px 15px;
+}
+.bton-index{
+    display: flex;
+    margin: auto;
+    padding: 10px 0;
+    margin-left: 2rem;
+}
+
+/*Diseño para el login*/
+div.body-login{
+    padding-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+div.contenedor-login{
+    width: 500px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border: 2px solid rgba(255, 255, 255, 0.049);
+    border-radius: 15px;
+    background: #5ccb5f;
+}
+div.contenedor-login h2{
+    background-color: #009929;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin: 0;
+    font-size: 2rem;
+}
+
 div.contenedor-login form{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: #5ccb5f;
-    height: 60vh;
-    width: 30vw;
-    margin-top:5rem;
-    border-radius:  1rem 1rem 1rem 1rem;
 }
-div.contenedor-login form input{
+
+div.datos-login {
+    margin: 5px;
+    padding-bottom: 10px;
     display: flex;
-    flex-direction: column;
-    width: 15rem;
-    height: 3rem;
-    border-radius:  1rem 1rem 1rem 1rem;
+    margin-top: 1rem;
+}
+div.datos-login input {
+    width: 200px;
+    height: 35px;
     border: 1px solid #009929;
+    border-radius: 5px;
+    background: white;
+    color: #000;
+    text-align: left;
+    margin: 0 5px;
     outline: none;
 }
-div.contenedor-login form button{
-    width: 15rem;
-    height: 3rem;
-    border-radius:  1rem 1rem 1rem 1rem;
-    background: #009929;
-
+.btn-login {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px 0;
 }
-div.contenedor-login form button:hover{
+
+.btn-login button {
+    margin: auto;
+    color: #fff;
+    padding: 5px 15px;
+    border: 0;
+    border-radius: 15px;
+    background: #009929;
+    width: 280px;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    
+}
+
+.btn-login button:hover {
     background: #fff;
     color: #009929;
     border: 1px solid #009929;
 }
-div.contenedor-login form h2{
-    color: #000;
-    font-size: 2rem;
-    margin-top: 2rem;
-    font-display: flex; 
-}
-div.contenedor-login form label{
-    color: #000;
-    font-size: 1rem;
-    font-display: flex; 
-}
 
+/*Diseño para el logout*/
 button.boton-logout{
     width: 10rem;
     height: 3rem;
@@ -83,6 +135,7 @@ button.boton-logout:hover{
     border: 1px solid #009929;
 }
 
+/*Diseño para el register*/
 div.body-register{
     padding-top: 10vh;
     display: flex;
@@ -103,6 +156,14 @@ div.contenedor-register{
     border-radius: 15px;
     background: #5ccb5f;
     
+}
+div.contenedor-register h2{
+    background-color: #009929;
+    color: #fff;
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin: 0;
+    font-size: 2rem;
 }
 div.contenedor-register form{
     display: flex;
@@ -202,6 +263,22 @@ div.contraseña input {
 
 .btn-register button:hover {
     background: #fff;
+    color: #009929;
+    border: 1px solid #009929;
+}
+
+/*Diseño para el Edit*/
+.modal-header{
+    background-color: #009929;
+    color: #fff;
+    font-size: 2rem;
+}
+.btn-edit button{
+    background-color: #009929;
+    color: #fff;
+}
+.btn-edit button:hover{
+    background-color: #fff;
     color: #009929;
     border: 1px solid #009929;
 }

@@ -33,10 +33,16 @@ const Index = () => {
 
   return (
     <div>
-      <h2>Lista de Usuarios</h2>
-      <Button variant="primary" href='/Register'>Crear cliente</Button>
+      
+      <div className='register-index'>
+        <h2>Panel de gestión de usuarios</h2>
+      </div>
 
-      <Table striped bordered hover size="sm">
+      <div className='bton-index'>
+        <Button variant='success' href='/Register'>Crear cliente</Button>
+      </div>
+
+      <Table striped bordered hover size="sm" responsive>
         <thead>
           <tr>
             <th>Nombre</th>
@@ -58,7 +64,7 @@ const Index = () => {
               <td>{client.first_last_name}</td>
               <td>{client.second_last_name}</td>
               <td>{client.email}</td>
-              <td>{client.identification}</td>
+              <td>{client.identificador}</td>
               <td>{client.score}</td>
               <td><ClientEdit clientId={client.id} /></td>
               <td><ClientDelete clientId={client.id} /></td>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { setToken } from '../storage/Storage';
-
-
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -34,6 +34,7 @@ const Login = () => {
             handleLoginSuccess(response.data.data.token);
         } else {
             console.error('Token no encontrado en la respuesta del servidor');
+            <Alert variant='danger' >HOLA MUNDO</Alert>
         }
         } catch (error) {
         console.error('Error al iniciar sesión:', error.response.data);
@@ -42,22 +43,30 @@ const Login = () => {
     };
 
     return (
-        <div className='contenedor-login'>
-            <div className='card-login'>
-                <form onSubmit={handleSubmit}>
-                    <h2>Iniciar Sesión</h2>
-                    <label>
-                    Usuario:
-                    <input type="username" name="username" onChange={handleChange} />
-                    </label>
-                    <br />
-                    <label>
-                    Contraseña:
-                    <input type="password" name="password" onChange={handleChange} />
-                    </label>
-                    <br />
-                    <Button type="submit">Iniciar Sesión</Button>
-                </form>
+        <div className='body-login'>
+            <div className='contenedor-login'>
+                <h2>Iniciar Sesión</h2>
+                <Form onSubmit={handleSubmit}>
+                    <div className='datos-login'>
+                        <Form.Group>
+                            <Form.Label>Usuario:</Form.Label>
+                            <Form.Control 
+                            required
+                            type="username" name="username" onChange={handleChange} />
+                        </Form.Group>
+                        
+                        <Form.Group>
+                            <Form.Label>Contraseña:</Form.Label>
+                            <Form.Control 
+                            required
+                            type="password" name="password" onChange={handleChange} />
+                        </Form.Group>
+                    </div>
+                    
+                    <div className='btn-login'>
+                        <Button type="submit">Iniciar Sesión</Button>
+                    </div>
+                </Form>
             </div>
         </div>
 
