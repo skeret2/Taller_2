@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        email: '',
+        username: '',
         password: '',
     });
 
@@ -27,7 +27,7 @@ const Login = () => {
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/auth/login', formData);
-            //console.log(response.data.data.token)
+            console.log(response.data)
             
         // Verificar si la respuesta contiene un token
         if (response.data.data.token) {
@@ -47,8 +47,8 @@ const Login = () => {
                 <form onSubmit={handleSubmit}>
                     <h2>Iniciar Sesión</h2>
                     <label>
-                    Correo Electrónico:
-                    <input type="email" name="email" onChange={handleChange} />
+                    Usuario:
+                    <input type="username" name="username" onChange={handleChange} />
                     </label>
                     <br />
                     <label>

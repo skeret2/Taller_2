@@ -12,8 +12,6 @@ const Register = () => {
         second_last_name: '',
         identificador: '',
         email: '',
-        password: '',
-        rol: 'usuario',
         score: 0,
     });
 
@@ -35,20 +33,19 @@ const Register = () => {
             };
 
             // Realizar la solicitud POST al backend de Laravel
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/register', formData, { headers });
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/registerclient', formData, { headers });
             console.log('Respuesta del servidor:', response.data);
-            alert('Usuario registrado exitosamente');
             window.location.href = '/users/Index';
 
         } catch (error) {
-            console.error('Error al registrar usuario:', error.response.data);
+            console.error('Error al registrar al cliente:', error.response.data);
         }
     };
 
     return (
         <div className='body-register'>
             <div className='contenedor-register'>
-                <h2>Registrar usuario</h2>
+                <h2>Registrar cliente</h2>
                 <Form onSubmit={handleSubmit}>
                     <div className='nombres'>
 
@@ -94,18 +91,13 @@ const Register = () => {
                     
                     <div className='contraseña'>
                         <label>
-                            Contraseña:
-                            <input type="password" name="password" value={formData.password} onChange={handleChange} />
-                        </label>
-
-                        <label>
                             Puntaje:
                             <input type="number" name="score" value={formData.score} onChange={handleChange} />
                         </label>
                     </div>
 
                     <div className='btn-register'>
-                        <button type="submit">Registrar Usuario</button>
+                        <button type="submit">Registrar cliente</button>
                     </div>
                     
                 </Form>

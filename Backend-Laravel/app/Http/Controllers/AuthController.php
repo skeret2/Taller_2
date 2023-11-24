@@ -16,15 +16,8 @@ class AuthController extends Controller
     public function create(Request $request)
     {
         $rules = [
-            'first_name' => 'required|string|max:100',
-            'second_name' => 'required|string|max:100',
-            'first_last_name' => 'required|string|max:100',
-            'second_last_name' => 'required|string|max:100',
-            'identificador' => ['required','unique:users,identificador',new ValidarRut()],
-            'email' => 'required|string|email|max:100|unique:users,email',
+            'username' => 'required|string|max:100',
             'password' => 'required|string|min:8',
-            'rol' => 'required|string|max:100',
-            'score' => 'required|integer| min:0',
         ];
 
         $validator = Validator::make($request->input(), $rules);
@@ -35,15 +28,8 @@ class AuthController extends Controller
             ], 400);
         }
         $user = User::create([
-            'first_name' => $request->first_name,
-            'second_name' => $request->second_name,
-            'first_last_name' => $request->first_last_name,
-            'second_last_name' => $request->second_last_name,
-            'identificador' => $request->identificador,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
-            'rol' => $request->rol,
-            'score' => $request->score,
         ]);
 
         $token = JWTAuth::fromUser($user);
@@ -58,11 +44,11 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $rules = [
-            'email' => 'string|email|max:100',
-            'password' => 'required|string'
+            'username' => 'required|string|max:100',
+            'password' => 'required|string|min:8',
         ];
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('username', 'password');
 
         if(Auth::guard('api')->attempt($credentials)){
             $user = Auth::guard('api')->user();
@@ -86,48 +72,9 @@ class AuthController extends Controller
     }
 
 
-    public function update(Request $request, User $user)
-    {
-        $rules = [
-            'first_name' => 'required|string|max:100',
-            'second_name' => 'required|string|max:100',
-            'first_last_name' => 'required|string|max:100',
-            'second_last_name' => 'required|string|max:100',
-            'email' => 'required|string|email|max:100|unique:users,email,' . $user->id,
-            'password' => 'required|string|min:8',
-            'score' => 'required|integer| min:0',
-        ];
-
-        $validator = Validator::make($request->input(), $rules);
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'errors' => $validator->errors()->all()
-            ], 400);
-        }
-
-        $user->update($request->input());
-        return response()->json([
-            'status' => true,
-            'message' => 'User updated successfully',
-        ], 200);
-    }
-
-
     public function index()
     {
         return User::all();
-    }
-
-
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return response()->json([
-            'res => true',
-            'mensaje' => 'User deleted successfully'
-        ],200);
-
     }
 
 }

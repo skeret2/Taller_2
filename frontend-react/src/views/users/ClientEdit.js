@@ -3,15 +3,13 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import { Button, Modal } from 'react-bootstrap';
 
-const UserEdit = ({userId, onUserEdited}) => {
+const ClientEdit = ({clientId, onUserEdited}) => {
     const [formData, setFormData] = useState({
         first_name: '',
         second_name: '',
         first_last_name: '',
         second_last_name: '',
         email: '',
-        password: '',
-        rol: 'usuario',
         score: 0,
     });
 
@@ -42,11 +40,11 @@ const UserEdit = ({userId, onUserEdited}) => {
             Authorization: `Bearer ${token}`,
             };
 
-            const response = await axios.put(`http://127.0.0.1:8000/api/auth/update/users/${userId}`, formData,{ headers });
+            const response = await axios.put(`http://127.0.0.1:8000/api/auth/update/client/${clientId}`, formData,{ headers });
             //actualizar la lista de usuarios después de la edicion.
             window.location.reload();
             if (onUserEdited) {
-                onUserEdited(userId);
+                onUserEdited(clientId);
             }
         }
         catch (error) {
@@ -101,10 +99,6 @@ const UserEdit = ({userId, onUserEdited}) => {
                                     <input type="email" name="email" value={formData.email} onChange={handleChange} />
                                 </label>
 
-                                <label>
-                                    Contraseña:
-                                    <input type="password" name="password" value={formData.password} onChange={handleChange} />
-                                </label>
 
                                 <label>
                                     Puntaje:
@@ -129,4 +123,4 @@ const UserEdit = ({userId, onUserEdited}) => {
     );
 }
 
-export default UserEdit;
+export default ClientEdit;

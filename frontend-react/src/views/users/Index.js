@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Table from 'react-bootstrap/Table';
-import UserDelete from './UserDelete';
-import UserEdit from './UserEdit';
+import ClientDelete from './ClientDelete';
+import ClientEdit from './ClientEdit';
 import { Button } from 'react-bootstrap';
 
 const Index = () => {
-  const [users, setUsers] = useState([]);
+  const [clients, setClients] = useState([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchClients = async () => {
       try {
         // Se obtiene el token almacenado
         const token = localStorage.getItem('token');
@@ -20,21 +20,21 @@ const Index = () => {
         };
 
         // Realiza la solicitud con el encabezado configurado
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/index', { headers });
+        const response = await axios.get('http://127.0.0.1:8000/api/auth/index/', { headers });
 
-        setUsers(response.data);
+        setClients(response.data);
       } catch (error) {
-        console.error('Error al obtener la lista de usuarios:', error);
+        console.error('Error al obtener la lista de clientes:', error);
       }
     };
 
-    fetchUsers();
+    fetchClients();
   }, []);
 
   return (
     <div>
       <h2>Lista de Usuarios</h2>
-      <Button variant="primary" href='/Register'>Crear usuario</Button>
+      <Button variant="primary" href='/Register'>Crear cliente</Button>
 
       <Table striped bordered hover size="sm">
         <thead>
@@ -51,17 +51,17 @@ const Index = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.first_name}</td>
-              <td>{user.second_name}</td>
-              <td>{user.first_last_name}</td>
-              <td>{user.second_last_name}</td>
-              <td>{user.email}</td>
-              <td>{user.identificador}</td>
-              <td>{user.score}</td>
-              <td><UserEdit userId={user.id} /></td>
-              <td><UserDelete userId={user.id} /></td>
+          {clients.map((client) => (
+            <tr key={client.id}>
+              <td>{client.first_name}</td>
+              <td>{client.second_name}</td>
+              <td>{client.first_last_name}</td>
+              <td>{client.second_last_name}</td>
+              <td>{client.email}</td>
+              <td>{client.identification}</td>
+              <td>{client.score}</td>
+              <td><ClientEdit clientId={client.id} /></td>
+              <td><ClientDelete clientId={client.id} /></td>
             </tr>
           ))}
         </tbody>

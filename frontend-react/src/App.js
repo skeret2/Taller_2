@@ -10,7 +10,8 @@ import Register from './views/Register';
 import Home from './views/Home';
 import Logout from './views/users/Logout';
 import ProtectedRoute from './components/ProtectedRoute';
-import UserEdit from './views/users/UserEdit';
+import ClientEdit from './views/users/ClientEdit';
+import ClientDelete from './views/users/ClientDelete';
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
             <Route path='/users/Index' element={<Index />} />
             <Route path='/Register' element={<Register />} />
             <Route path='/users/Logout' element={<Logout/>} />
-            <Route path='/users/Edit' element={<UserEdit/>} ></Route>
+            <Route path='/users/Edit' element={<ClientEdit/>} ></Route>
+            <Route path='/users/Delete' element={<ClientDelete/>} ></Route>
           </Route>
 
         </Routes>

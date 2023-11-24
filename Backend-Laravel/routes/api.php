@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClientController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,12 +17,18 @@ use App\Http\Controllers\AuthController;
 
 
 Route::post('auth/login', [AuthController::class, 'login']);
+//Route::post('auth/register', [AuthController::class, 'create']); // descomentar para registrar usuarios Admin
+
 
 // rutas protegidas por JWT
 Route::middleware('jwt.verify')->group(function(){
-    Route::get('auth/index',[AuthController::class,'index']);
-    Route::post('auth/register', [AuthController::class, 'create']);
-    Route::put('auth/update/users/{user}', [AuthController::class,'update']);
-    Route::delete('auth/delete/{user}', [AuthController::class,'destroy']);
+
+    Route::get('auth/user', [AuthController::class, 'index']);
     Route::post('auth/logout', [AuthController::class, 'logout']);
+
+    //rutas clientes
+    Route::get('auth/index/',[ClientController::class,'indexClient']);
+    Route::post('auth/registerclient', [ClientController::class, 'createClient']);
+    Route::put('auth/update/client/{client}', [ClientController::class,'updateClient']);
+    Route::delete('auth/delete/client/{client}', [ClientController::class,'destroyClient']);
 });

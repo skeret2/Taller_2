@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Button, Modal } from 'react-bootstrap';
 
-const UserDelete = ({ userId, onUserDeleted }) => {
+const ClientDelete = ({ clientId, onClientDeleted }) => {
     const [showModal, setShowModal] = useState(false);
 
     const handleDelete = async () => {
@@ -20,11 +20,11 @@ const UserDelete = ({ userId, onUserDeleted }) => {
             Authorization: `Bearer ${token}`,
             };
 
-            const response = await axios.delete(`http://127.0.0.1:8000/api/auth/delete/${userId}`,{ headers });
+            const response = await axios.delete(`http://127.0.0.1:8000/api/auth/delete/client/${clientId}`,{ headers });
             //actualizar la lista de usuarios después de la eliminación.
             window.location.reload();
-            if (onUserDeleted) {
-                onUserDeleted(userId);
+            if (onClientDeleted) {
+                onClientDeleted(clientId);
             }
         } catch (error) {
         console.error('Error al eliminar usuario:', error.response.data);
@@ -65,4 +65,4 @@ const UserDelete = ({ userId, onUserDeleted }) => {
     );
 }
 
-export default UserDelete;
+export default ClientDelete;

@@ -5,10 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from 'react-router-dom';
 import CerrarSesion from '../views/users/Logout';
-
 import { isAuthenticated } from '../storage/Storage';
-import { Button } from 'bootstrap';
-import Logout from '../views/users/Logout';
+
 
 const Navegacion = () => {
     const authUser = isAuthenticated('authUser');
