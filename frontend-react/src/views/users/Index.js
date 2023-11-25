@@ -6,8 +6,9 @@ import ClientEdit from './ClientEdit';
 import { Button } from 'react-bootstrap';
 
 const Index = () => {
+  // Se define el estado de la lista de clientes
   const [clients, setClients] = useState([]);
-
+  
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -33,18 +34,21 @@ const Index = () => {
 
   return (
     <div>
-      
+      {/* Este es el index que contiene la listas de clientes*/}
       <div className='register-index'>
         <h2>Panel de gestión de usuarios</h2>
       </div>
 
+      {/*boton para crear cliente */}
       <div className='bton-index'>
         <Button variant='success' href='/Register'>Crear cliente</Button>
       </div>
 
+      {/*tabla que contiene la lista de clientes */}
       <Table striped bordered hover size="sm" responsive>
         <thead>
           <tr>
+            {/*cabecera de la tabla */}
             <th>Nombre</th>
             <th>Segundo nombre</th>
             <th>Apellido</th>
@@ -57,6 +61,7 @@ const Index = () => {
           </tr>
         </thead>
         <tbody>
+          {/*cuerpo de la tabla */}
           {clients.map((client) => (
             <tr key={client.id}>
               <td>{client.first_name}</td>
@@ -66,8 +71,8 @@ const Index = () => {
               <td>{client.email}</td>
               <td>{client.identificador}</td>
               <td>{client.score}</td>
-              <td><ClientEdit clientId={client.id} /></td>
-              <td><ClientDelete clientId={client.id} /></td>
+              <td><ClientEdit clientId={client.id} /></td> {/*boton para editar cliente */}
+              <td><ClientDelete clientId={client.id} /></td> {/*boton para eliminar cliente */}
             </tr>
           ))}
         </tbody>

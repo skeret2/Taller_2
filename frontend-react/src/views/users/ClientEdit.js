@@ -40,6 +40,7 @@ const ClientEdit = ({clientId, onUserEdited}) => {
             Authorization: `Bearer ${token}`,
             };
 
+            // Realizar la solicitud de edicion a la api
             const response = await axios.put(`http://127.0.0.1:8000/api/auth/update/client/${clientId}`, formData,{ headers });
             //actualizar la lista de usuarios después de la edicion.
             window.location.reload();
@@ -47,9 +48,11 @@ const ClientEdit = ({clientId, onUserEdited}) => {
                 onUserEdited(clientId);
             }
         }
+        //capturar el error en caso de que no se pueda editar el usuario
         catch (error) {
             console.error('Error al editar usuario:', error.response.data);
         }
+        //cerrar el modal despues de la accion (exito o error)
         finally {
             // Cerrar el modal después de la acción (éxito o error)
             setShowModal(false);
@@ -59,8 +62,10 @@ const ClientEdit = ({clientId, onUserEdited}) => {
     return (
 
         <div className='body-edit'>
+            {/*boton para editar el usuario */}
             <Button variant="success" onClick={handleModal}>Editar</Button>
 
+            {/*modal para editar el usuario */}
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
                     <div className='model-header'>
@@ -69,12 +74,17 @@ const ClientEdit = ({clientId, onUserEdited}) => {
 
                 </Modal.Header>
 
+                {/*cuerpo del modal */}
                 <Modal.Body>
                     <div className='contenedor-edit'>
+                        {/*formulario para editar el usuario */}
                         <Form onSubmit={handleSubmit}>
                             <div className=''>
+
+                                {/*campos del formulario */}
                                 <Form.Group>
                                     <Form.Label>Primer nombre:</Form.Label>
+                                    {/*validaciones  */}
                                     <Form.Control
                                         required
                                         type="text" name="first_name" value={formData.first_name} onChange={handleChange}>
@@ -83,6 +93,7 @@ const ClientEdit = ({clientId, onUserEdited}) => {
                                 
                                 <Form.Group>
                                     <Form.Label>Segundo nombre:</Form.Label>
+                                    {/*validaciones  */}
                                     <Form.Control
                                         required
                                         type="text" name="second_name" value={formData.second_name} onChange={handleChange}>
@@ -95,6 +106,7 @@ const ClientEdit = ({clientId, onUserEdited}) => {
 
                                 <Form.Group>
                                     <Form.Label>Primer apellido:</Form.Label>
+                                    {/*validaciones  */}
                                     <Form.Control
                                         required
                                         type="text" name="first_last_name" value={formData.first_last_name} onChange={handleChange}>
@@ -103,6 +115,7 @@ const ClientEdit = ({clientId, onUserEdited}) => {
 
                                 <Form.Group>
                                     <Form.Label>Segundo apellido:</Form.Label>
+                                    {/*validaciones  */}
                                     <Form.Control
                                         required
                                         type="text" name="second_last_name" value={formData.second_last_name} onChange={handleChange}>
@@ -114,6 +127,7 @@ const ClientEdit = ({clientId, onUserEdited}) => {
 
                                 <Form.Group>
                                     <Form.Label>Correo electrónico:</Form.Label>
+                                    {/*validaciones  */}
                                     <Form.Control
                                         required
                                         type="email" name="email" placeholder='example@gmail.com' value={formData.email} onChange={handleChange}>
@@ -122,6 +136,7 @@ const ClientEdit = ({clientId, onUserEdited}) => {
 
                                 <Form.Group>
                                     <Form.Label>Puntaje:</Form.Label>
+                                    {/*validaciones  */}
                                     <Form.Control
                                         required
                                         type="number" name="score" value={formData.password} onChange={handleChange}>
@@ -133,6 +148,7 @@ const ClientEdit = ({clientId, onUserEdited}) => {
                 </Modal.Body>
 
                 <Modal.Footer>
+                    {/*footer del modal */}
                     <Button variant="secondary" onClick={handleCloseModal}>
                         No
                     </Button>

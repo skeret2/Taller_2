@@ -44,12 +44,13 @@ const Register = () => {
     return (
         <div className='body-register'>
             <div className='contenedor-register'>
+                {/* formulario de registro */}
                 <h2>Registrar cliente</h2>
                 <Form onSubmit={handleSubmit}>
                     <div className='nombres'>
-
                         <Form.Group>
                             <Form.Label>Primer nombre:</Form.Label>
+                            {}
                             <Form.Control
                             required
                             type="text" name="first_name" value={formData.first_name} onChange={handleChange} >
@@ -59,6 +60,7 @@ const Register = () => {
 
                         <Form.Group>
                             <Form.Label>Segundo nombre:</Form.Label>
+                            {/*Vvalidaciones*/}
                             <Form.Control
                             required
                             type="text" name="second_name" value={formData.second_name} onChange={handleChange} >
@@ -71,6 +73,7 @@ const Register = () => {
 
                         <Form.Group>
                             <Form.Label>Primer apellido:</Form.Label>
+                            {/*validaciones*/}
                             <Form.Control
                             required
                             type="stext" name="first_last_name" value={formData.first_last_name} onChange={handleChange} >
@@ -79,6 +82,7 @@ const Register = () => {
 
                         <Form.Group>
                             <Form.Label>Segundo apellido:</Form.Label>
+                            {/*validaciones*/}
                             <Form.Control
                             required
                             type="text" name="second_last_name" value={formData.second_last_name} onChange={handleChange} >
@@ -91,6 +95,7 @@ const Register = () => {
 
                         <Form.Group>
                             <Form.Label>Identificador (Rut o DNI):</Form.Label>
+                            {/*validaciones*/}
                             <Form.Control
                             required
                             type="text" name="identificador" placeholder='example:11222333k' value={formData.identificador} onChange={handleChange} >
@@ -99,6 +104,7 @@ const Register = () => {
 
                         <Form.Group>
                             <Form.Label>Correo electrónico:</Form.Label>
+                            {/*validaciones*/}
                             <Form.Control
                             required
                             type="email" name="email" placeholder='example@gmail.com' value={formData.email} onChange={handleChange} >

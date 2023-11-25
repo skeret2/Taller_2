@@ -20,6 +20,7 @@ const ClientDelete = ({ clientId, onClientDeleted }) => {
             Authorization: `Bearer ${token}`,
             };
 
+            // Realizar la solicitud de eliminación a la api
             const response = await axios.delete(`http://127.0.0.1:8000/api/auth/delete/client/${clientId}`,{ headers });
             //actualizar la lista de usuarios después de la eliminación.
             window.location.reload();
@@ -41,17 +42,22 @@ const ClientDelete = ({ clientId, onClientDeleted }) => {
 
     return (
         <div>
+        {/*boton para eliminar cliente */}
         <Button variant="danger" onClick={handleDelete}>
             Eliminar
         </Button>
 
+        {/*modal para confirmar la eliminación del cliente */}
         <Modal show={showModal} onHide={handleCloseModal}>
             <Modal.Header closeButton>
+            {/*titulo del modal */}
             <Modal.Title>Confirmar eliminación</Modal.Title>
             </Modal.Header>
+            {/*cuerpo del modal */}
             <Modal.Body>
             <p>¿Estás seguro de que deseas eliminar este usuario?</p>
             </Modal.Body>
+            {/*footer del modal */}
             <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>
                 No

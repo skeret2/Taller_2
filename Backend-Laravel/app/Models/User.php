@@ -18,6 +18,8 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array<int, string>
      */
+
+    //campos del modelo admin
     protected $fillable = [
         'username',
         'password'
@@ -43,6 +45,7 @@ class User extends Authenticatable implements JWTSubject
         'password' => 'hashed',
     ];
 
+    //metodos de JWT
     public function getJWTIdentifier(){
         return $this->getKey();
     }

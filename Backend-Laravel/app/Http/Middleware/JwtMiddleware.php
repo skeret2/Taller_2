@@ -22,16 +22,17 @@ class JwtMiddleware
 
         try{
             JWTAuth::parseToken()->authenticate();
-            
+
         }catch(Exception $e){
+            //excepcion token token invalido
             if($e instanceof TokenInvalidException){
                 return response()->json(['status'=>'invalid token'],401);
             }
-
+            //excepcion token expirado
             if($e instanceof TokenExpiredException){
                 return response()->json(['status'=>'expired token'],401);
             }
-
+            //excepcion token no encontrado
             return response()->json(['status'=>'token not found'],401);
 
         }

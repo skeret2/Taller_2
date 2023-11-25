@@ -2,6 +2,7 @@ import React from 'react'
 import UncontrolledExample from '../components/Carrusel';
 
 const Home = () => {
+    // Este es un home para la pagina principal
     return (
         <>
         <div className='home'>

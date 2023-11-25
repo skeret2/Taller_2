@@ -46,10 +46,12 @@ const Login = () => {
         <div className='body-login'>
             <div className='contenedor-login'>
                 <h2>Iniciar Sesión</h2>
+                {/* formulario de login */}
                 <Form onSubmit={handleSubmit}>
                     <div className='datos-login'>
                         <Form.Group>
                             <Form.Label>Usuario:</Form.Label>
+                            {/*validaciones  */}
                             <Form.Control 
                             required
                             type="username" name="username" onChange={handleChange} />
@@ -57,12 +59,13 @@ const Login = () => {
                         
                         <Form.Group>
                             <Form.Label>Contraseña:</Form.Label>
+                            {/*validaciones  */}
                             <Form.Control 
                             required
                             type="password" name="password" onChange={handleChange} />
                         </Form.Group>
                     </div>
-                    
+                    {/*boton para iniciar sesion */}
                     <div className='btn-login'>
                         <Button type="submit">Iniciar Sesión</Button>
                     </div>

@@ -44,6 +44,7 @@ class ClientController extends Controller
 
     public function updateClient(Request $request, Client $client)
     {
+        //reglas de validacion
         $rules = [
             'first_name' => 'required|string|max:100',
             'second_name' => 'required|string|max:100',
@@ -53,6 +54,7 @@ class ClientController extends Controller
             'score' => 'required|integer| min:0',
         ];
 
+        //validar datos de entrada
         $validator = Validator::make($request->input(), $rules);
         if ($validator->fails()) {
             return response()->json([
@@ -60,7 +62,7 @@ class ClientController extends Controller
                 'errors' => $validator->errors()->all()
             ], 400);
         }
-
+        //actualizar usuario
         $client->update($request->input());
         return response()->json([
             'status' => true,
@@ -71,12 +73,14 @@ class ClientController extends Controller
 
     public function indexClient()
     {
+        //retorna todos los clientes
         return Client::all();
     }
 
 
     public function destroyClient(Client $client)
     {
+        //elimina un cliente
         $client->delete();
         return response()->json([
             'res => true',

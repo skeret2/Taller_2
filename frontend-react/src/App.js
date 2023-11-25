@@ -22,9 +22,11 @@ function App() {
         <Navegacion />
 
         <Routes>
+          {/* Rutas de la aplicación */}
           <Route path='/' element={<Home />} />
           <Route path='/Login' element={<Login />} />
 
+          {/* Rutas protegidas */}
           <Route element={<ProtectedRoute/>} >
             <Route path='/users/Index' element={<Index />} />
             <Route path='/Register' element={<Register />} />

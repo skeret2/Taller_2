@@ -15,11 +15,13 @@ class AuthController extends Controller
 {
     public function create(Request $request)
     {
+        //reglas de validacion
         $rules = [
             'username' => 'required|string|max:100',
             'password' => 'required|string|min:8',
         ];
 
+        //validar datos de entrada
         $validator = Validator::make($request->input(), $rules);
         if ($validator->fails()) {
             return response()->json([
@@ -27,13 +29,16 @@ class AuthController extends Controller
                 'errors' => $validator->errors()->all()
             ], 400);
         }
+        //crear usuario
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
 
+        //crear token con JWT
         $token = JWTAuth::fromUser($user);
 
+        //retornar respuesta
         return response()->json([
             'status' => true,
             'token' => $token,

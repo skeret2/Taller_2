@@ -3,6 +3,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 function UncontrolledExample() {
     return (
+        // componente de carrusel de bootstrap para mostrar las imagenes en el home
         <Carousel>
         <Carousel.Item>
             <img src='imagenes/Verduras.jpg'></img>
