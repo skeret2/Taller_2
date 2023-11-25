@@ -8,7 +8,9 @@ import { Button } from 'react-bootstrap';
 const Index = () => {
   // Se define el estado de la lista de clientes
   const [clients, setClients] = useState([]);
-  
+  // Se define el estado del término de búsqueda
+  const [searchTerm, setSearchTerm] = useState('');
+
   useEffect(() => {
     const fetchClients = async () => {
       try {
@@ -29,8 +31,18 @@ const Index = () => {
       }
     };
 
-    fetchClients();
-  }, []);
+    fetchClients(); // Mueve esta llamada aquí para que se ejecute una vez al cargar el componente
+  }, []); // Deja el array de dependencias vacío para que se ejecute solo al montar el componente
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Se filtra la lista de clientes por nombre, email o rut
+  const filteredClients = clients.filter((client) =>
+    client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.identificador.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
@@ -39,16 +51,22 @@ const Index = () => {
         <h2>Panel de gestión de usuarios</h2>
       </div>
 
-      {/*boton para crear cliente */}
+      {/* boton para crear cliente */}
       <div className='bton-index'>
         <Button variant='success' href='/Register'>Crear cliente</Button>
+
+        <div className='buscador'>
+          <label>Buscar por email o rut/dni:</label>
+          <input type="text" value={searchTerm} onChange={handleSearchChange} />
+        </div>
+
       </div>
 
-      {/*tabla que contiene la lista de clientes */}
+      {/* tabla que contiene la lista de clientes */}
       <Table striped bordered hover size="sm" responsive>
         <thead>
           <tr>
-            {/*cabecera de la tabla */}
+            {/* cabecera de la tabla */}
             <th>Nombre</th>
             <th>Segundo nombre</th>
             <th>Apellido</th>
@@ -61,8 +79,8 @@ const Index = () => {
           </tr>
         </thead>
         <tbody>
-          {/*cuerpo de la tabla */}
-          {clients.map((client) => (
+          {/* cuerpo de la tabla */}
+          {filteredClients.map((client) => (
             <tr key={client.id}>
               <td>{client.first_name}</td>
               <td>{client.second_name}</td>
@@ -71,14 +89,14 @@ const Index = () => {
               <td>{client.email}</td>
               <td>{client.identificador}</td>
               <td>{client.score}</td>
-              <td><ClientEdit clientId={client.id} /></td> {/*boton para editar cliente */}
-              <td><ClientDelete clientId={client.id} /></td> {/*boton para eliminar cliente */}
+              <td><ClientEdit clientId={client.id} /></td> {/* boton para editar cliente */}
+              <td><ClientDelete clientId={client.id} /></td> {/* boton para eliminar cliente */}
             </tr>
           ))}
         </tbody>
       </Table>
     </div>
   );
-};
+}
 
 export default Index;
